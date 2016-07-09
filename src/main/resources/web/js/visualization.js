@@ -22,7 +22,7 @@ function loadButtons(classes, id, btnClass) {
         return;
     }
     classes.forEach(function(val){
-        var classButton = $("<button>", {class: btnClass + " btn class-btn"});
+        var classButton = $("<button>", {class: btnClass + " btn btn-sm class-btn"});
         classButton.text(getName(val));
         classButton.click(function () {
             loadClassInfo(function (info){

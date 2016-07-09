@@ -2,16 +2,11 @@ package ar.edu.itba;
 
 import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;
-import org.apache.jena.rdf.model.*;
-import org.apache.jena.util.FileManager;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.util.iterator.ExtendedIterator;
-
-import static spark.Spark.get;
-import static spark.Spark.staticFileLocation;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -19,13 +14,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static spark.Spark.get;
+import static spark.Spark.staticFileLocation;
+
 public class App
 {
     public static void main( String[] args ) throws Exception
     {
         OntModel model = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM);
 
-        InputStream in = App.class.getResourceAsStream("/wine.rdf");
+        InputStream in = App.class.getResourceAsStream("/pizza.owl.xml");
         if(in == null ){
             throw new Exception();
         }
@@ -33,13 +31,7 @@ public class App
         model.read(in, null);
 
         ExtendedIterator<OntClass> classes = model.listClasses();
-        List<String> classesList = new ArrayList<>();
-        while (classes.hasNext()) {
-            OntClass thisClass = classes.next();
-            if(!thisClass.isRestriction()){
-                classesList.add(thisClass.toString());
-            }
-        }
+        List<String> classesList = getClasses(classes);
         staticFileLocation("/web");
         get("/classes", (req, res) -> {
             String classId = req.queryParams("class");
@@ -63,10 +55,18 @@ public class App
         List<String> result = new ArrayList<>();
         while(it.hasNext()){
             OntClass cl = it.next();
-            if(!cl.isRestriction()){
+            if(isNormalClass(cl)){
                 result.add(cl.toString());
             }
         }
         return result;
+    }
+
+    private static boolean isNormalClass(OntClass cl) {
+        return !cl.isRestriction() &&
+                !cl.isEnumeratedClass() &&
+                !cl.isComplementClass() &&
+                !cl.isIntersectionClass() &&
+                !cl.isUnionClass();
     }
 }
