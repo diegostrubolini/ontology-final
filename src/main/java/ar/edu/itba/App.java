@@ -6,6 +6,8 @@ import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;
 import org.apache.jena.rdf.model.ModelFactory;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 
 import static spark.Spark.get;
@@ -17,7 +19,12 @@ public class App
     {
         OntModel model = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM);
 
-        InputStream in = App.class.getResourceAsStream("/wine.rdf");
+        InputStream in;
+        if(args.length == 0) {
+            in = App.class.getResourceAsStream("/ejemplo_clases.owl");
+        } else {
+            in = new FileInputStream(new File(args[0]));
+        }
         if(in == null ){
             throw new Exception();
         }
