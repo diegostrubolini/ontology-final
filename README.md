@@ -13,3 +13,6 @@ Students:
 
 ## Run with custom rdf
 ```java -jar target/ontology-final-1.0-SNAPSHOT.jar <filepath>```
+
+## Usage
+From your browser go to the following [url](http://localhost:4567/)
