@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#"
+     xml:base="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:untitled-ontology-2="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#feedsOn -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#feedsOn">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Animal"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#LivingThing"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#growsFrom -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#growsFrom">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Plant"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#NonLivingThing"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Animal -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Animal">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#LivingThing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#feedsOn"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#LivingThing"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Plant"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Fish -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Fish">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Animal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#LivingThing -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#LivingThing">
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#NonLivingThing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Mammal -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Mammal">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Animal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#NonLivingThing -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#NonLivingThing"/>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Plant -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Plant">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#LivingThing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Reptile -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Reptile">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Animal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Rock -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Rock">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#NonLivingThing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Water -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Water">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#NonLivingThing"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Cat -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Cat">
+        <rdf:type rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Mammal"/>
+        <feedsOn rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Tuna"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Dog -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Dog">
+        <rdf:type rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Mammal"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Grass -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Grass">
+        <rdf:type rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Plant"/>
+        <owl:sameAs rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Turf"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Horse -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Horse">
+        <rdf:type rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Mammal"/>
+        <feedsOn rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Grass"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Snake -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Snake">
+        <rdf:type rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Reptile"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Tuna -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Tuna">
+        <rdf:type rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Fish"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Turf -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Turf">
+        <rdf:type rdf:resource="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Plant"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Fish"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Mammal"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/diegostrubolini/ontologies/2016/3/untitled-ontology-2#Reptile"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.1.20160306-0033) https://github.com/owlcs/owlapi -->
+
