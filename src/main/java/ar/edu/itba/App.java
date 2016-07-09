@@ -7,7 +7,6 @@ import org.apache.jena.ontology.OntModelSpec;
 import org.apache.jena.rdf.model.ModelFactory;
 
 import java.io.InputStream;
-import java.util.List;
 
 import static spark.Spark.get;
 import static spark.Spark.staticFileLocation;
@@ -18,13 +17,13 @@ public class App
     {
         OntModel model = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM);
 
-        InputStream in = App.class.getResourceAsStream("/pizza.owl.xml");
+        InputStream in = App.class.getResourceAsStream("/wine.rdf");
         if(in == null ){
             throw new Exception();
         }
 
         model.read(in, null);
-        
+
         staticFileLocation("/web");
         get("/classes", (req, res) -> {
             String classId = req.queryParams("class");

@@ -14,6 +14,7 @@ function getName(ontName){
 function cleanInfoPanel() {
     $('#subclasses').empty();
     $('#superclasses').empty();
+    $('#instances').empty();
 }
 
 function loadButtons(classes, id, btnClass) {
@@ -31,9 +32,23 @@ function loadButtons(classes, id, btnClass) {
                 $('#className').text(getName(classInfo.classId));
                 loadButtons(classInfo.subclasses, "subclasses", "btn-warning");
                 loadButtons(classInfo.superclasses, "superclasses", "btn-success");
+                loadLabels(classInfo.instances, "instances", "instance-label");
+
             }, val);
         });
         $("#" + id).append(classButton);
+    });
+}
+
+function loadLabels(instances, id, labelClass) {
+    if(instances.length == 0){
+        $("#" + id).append(addAlert("warning","No "+ id + " were found"));
+        return;
+    }
+    instances.forEach(function(val){
+        var instanceButton = $("<div>", {class: labelClass + " btn btn-xs"});
+        instanceButton.text(getName(val));
+        $("#" + id).append(instanceButton);
     });
 }
 

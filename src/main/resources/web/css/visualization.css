@@ -2,6 +2,18 @@
     margin: 3px
 }
 
+.instance-label {
+    margin: 3px;
+    background-color: #8061cc;
+    border-color: #8061cc;
+    color: white
+}
+
+.instance-label:hover {
+    color: white
+}
+
+
 #main-title {
     margin: 20px
 }
