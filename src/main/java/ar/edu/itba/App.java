@@ -35,12 +35,10 @@ public class App
         get("/classes", (req, res) -> {
             String classId = req.queryParams("class");
             if(StringUtils.isBlank(classId)) {
-                return new Gson().toJson(OntoUtils.getClasses(model));
+            	String gson = new Gson().toJson(OntoUtils.getClasses(model));
+                return gson;
             }
             return new Gson().toJson(OntoUtils.getClassInfo(model, classId));
-
         });
-
     }
-
 }
