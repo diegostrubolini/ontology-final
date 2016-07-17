@@ -64,9 +64,6 @@ function drawGraph(classes, id) {
 		loadClassesInfo(function (info) {
             var classesInfo = JSON.parse(info);
             classesInfo.forEach(function (classInfo) {
-            	classInfo.subclasses.forEach(function(subclass) {
-                	createEdge(g, currentNode, subclass, 'e' + i++, null);
-                });
                 classInfo.superclasses.forEach(function(superclass) {
                 	createEdge(g, currentNode, superclass, 'e' + i++, ['line', 'curve', 'arrow', 'curvedArrow'][Math.random() * 4 | 0]);	
                 });
@@ -79,7 +76,12 @@ function drawGraph(classes, id) {
 	                        container: document.getElementById('graph-container'),
 	                        type: 'canvas'
 	                    },
-                    });
+	                    settings: {
+	                    	edgeLabelSize: 'proportional',
+	                        edgeLabelThreshold: 10,
+	                        minEdgeSize: 10
+	                    }
+                    }).refresh();
                 }
             });
         }, val);
@@ -89,6 +91,7 @@ function drawGraph(classes, id) {
 function createEdge(graph, source, target, id, type) {
 	graph.edges.push({
 	    id: id,
+	    label: "lala",
 	    source: source,
 	    target: target,
 	    size: 1,
