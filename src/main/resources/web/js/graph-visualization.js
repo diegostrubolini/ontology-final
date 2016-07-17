@@ -26,37 +26,42 @@ function drawGraph(classes) {
 		    color: '#666'
 		});
         classInfo.superclasses.forEach(function(superclass) {
-        	createEdge(g, classInfo.classId, superclass, 'e' + i++, ['line', 'curve', 'arrow', 'curvedArrow'][Math.random() * 4 | 0]);	
+        	createEdge(g, classInfo.classId, superclass, 'e' + i++);	
         });
         classesSize--;
         if(classesSize == 0) {
-            new sigma({
+            var s = new sigma({
                 graph: g,
-                container: 'graph-container',
                 renderer: {
                     container: document.getElementById('graph-container'),
                     type: 'canvas'
                 },
                 settings: {
                 	edgeLabelSize: 'proportional',
-                    edgeLabelThreshold: 10,
-                    minEdgeSize: 10
+                    edgeLabelThreshold: 4,
+                    maxEdgeSize: 3,
+                    enableEdgeHovering: true,
+                    edgeHoverColor: 'edge',
+                    edgeHoverSizeRatio: 1,
+                    edgeHoverExtremities: true,
+                    animationsTime: 1500,
+                    dragNodeStickiness: 0.01,
+                    nodeBorderSize: 2,
+                    defaultNodeBorderColor: '#000'
                 }
-            }).refresh();
+            });
         }
     });
 }
 
-function createEdge(graph, source, target, id, type) {
-	var edge = {
+function createEdge(graph, source, target, id) {
+	graph.edges.push({
 	    id: id,
-	    label: "lala",
 	    source: source,
 	    target: target,
 	    size: 1,
 	    color: '#ccc',
-	    type: type
-	};
-	graph.edges.push(edge);
-	return edge;
+	    hover_color: '#000',
+	    type: 'curvedArrow'
+	});
 }
