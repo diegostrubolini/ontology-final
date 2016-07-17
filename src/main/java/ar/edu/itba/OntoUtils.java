@@ -1,16 +1,13 @@
 package ar.edu.itba;
 
-import org.apache.jena.ontology.OntClass;
-import org.apache.jena.ontology.OntModel;
-import org.apache.jena.ontology.OntResource;
-import org.apache.jena.util.iterator.ExtendedIterator;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static spark.Spark.get;
+import org.apache.jena.ontology.OntClass;
+import org.apache.jena.ontology.OntModel;
+import org.apache.jena.util.iterator.ExtendedIterator;
 
 public class OntoUtils {
 	public static Map<String, Object> getClassInfo(OntModel model, String classId) {

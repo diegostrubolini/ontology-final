@@ -65,16 +65,20 @@ function drawGraph(classes, id) {
             var classesInfo = JSON.parse(info);
             classesInfo.forEach(function (classInfo) {
             	classInfo.subclasses.forEach(function(subclass) {
-                	createEdge(g, currentNode, subclass, 'e' + i++);	
+                	createEdge(g, currentNode, subclass, 'e' + i++, null);
                 });
                 classInfo.superclasses.forEach(function(superclass) {
-                	createEdge(g, currentNode, superclass, 'e' + i++);	
+                	createEdge(g, currentNode, superclass, 'e' + i++, ['line', 'curve', 'arrow', 'curvedArrow'][Math.random() * 4 | 0]);	
                 });
                 classesSize--;
                 if(classesSize == 0) {
                     new sigma({
                         graph: g,
-                        container: 'graph-container'
+                        container: 'graph-container',
+                        renderer: {
+	                        container: document.getElementById('graph-container'),
+	                        type: 'canvas'
+	                    },
                     });
                 }
             });
@@ -82,13 +86,14 @@ function drawGraph(classes, id) {
 	});
 }
 
-function createEdge(graph, source, target, id) {
+function createEdge(graph, source, target, id, type) {
 	graph.edges.push({
 	    id: id,
 	    source: source,
 	    target: target,
 	    size: 1,
-	    color: '#ccc'
+	    color: '#ccc',
+	    type: type
 	});
 }
 
