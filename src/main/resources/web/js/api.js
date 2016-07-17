@@ -11,6 +11,10 @@ function loadClasses(callback) {
     performQuery(callback, "/classes", {});
 }
 
+function loadClassesInfo(callback) {
+    performQuery(callback, "/allClasses", {});
+}
+
 function loadClassInfo(callback, name) {
     performQuery(callback, "/classes", {"class" : name});
 }

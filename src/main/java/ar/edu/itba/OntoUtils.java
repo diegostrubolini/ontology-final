@@ -25,6 +25,14 @@ public class OntoUtils {
 		classInfo.put("classId", ontClass.toString());
 		return classInfo;
 	}
+	
+	public static List<Map<String, Object>> getClassesInfo(OntModel model) {
+		List<Map<String, Object>> ans = new ArrayList<>();
+		for (String clazz : getClasses(model)) {
+			ans.add(getClassInfo(model, clazz));
+		}
+		return ans;
+	}
 
 	public static List<String> itClassesToList(ExtendedIterator<OntClass> it) {
 		List<String> result = new ArrayList<>();

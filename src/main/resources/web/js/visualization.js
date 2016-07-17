@@ -48,8 +48,8 @@ function drawGraph(classes, id) {
 	    },
 	    currentNode,
 	    i = 0;
-	console.log("before");
     var classesSize = classes.length;
+
 	classes.forEach(function(val) {
 		currentNode = val;
 		var className = getName(val);
@@ -61,38 +61,35 @@ function drawGraph(classes, id) {
 		    size: 1,
 		    color: '#666'
 		});
-		loadClassInfo(function (info) {
-            var classInfo = JSON.parse(info);
-            classInfo.subclasses.forEach(function(subclass) {
-            	g.edges.push({
-    			    id: 'e' + i++,
-    			    source: currentNode,
-    			    target: subclass,
-    			    size: 1,
-    			    color: '#ccc'
-    			});
-            });
-            classInfo.superclasses.forEach(function(superclass) {
-            	g.edges.push({
-    			    id: 'e' + i++,
-    			    source: currentNode,
-    			    target: superclass,
-    			    size: 1,
-    			    color: '#ccc'
-    			});
-            });
-            console.log("done");
-            classesSize--;
-            if(classesSize == 0) {
-                new sigma({
-                    graph: g,
-                    container: 'graph-container'
+		loadClassesInfo(function (info) {
+            var classesInfo = JSON.parse(info);
+            classesInfo.forEach(function (classInfo) {
+            	classInfo.subclasses.forEach(function(subclass) {
+                	createEdge(g, currentNode, subclass, 'e' + i++);	
                 });
-            }
+                classInfo.superclasses.forEach(function(superclass) {
+                	createEdge(g, currentNode, superclass, 'e' + i++);	
+                });
+                classesSize--;
+                if(classesSize == 0) {
+                    new sigma({
+                        graph: g,
+                        container: 'graph-container'
+                    });
+                }
+            });
         }, val);
 	});
-	console.log("after");
+}
 
+function createEdge(graph, source, target, id) {
+	graph.edges.push({
+	    id: id,
+	    source: source,
+	    target: target,
+	    size: 1,
+	    color: '#ccc'
+	});
 }
 
 function loadLabels(instances, id, labelClass) {

@@ -40,5 +40,9 @@ public class App
             }
             return new Gson().toJson(OntoUtils.getClassInfo(model, classId));
         });
+        
+        get("/allClasses", (req, res) -> {
+            return new Gson().toJson(OntoUtils.getClassesInfo(model));
+        });
     }
 }
