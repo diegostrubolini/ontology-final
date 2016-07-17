@@ -4,6 +4,7 @@ function loadClassesInList() {
     loadClasses(function (data){
         var classes = JSON.parse(data);
         loadButtons(classes, "classes", "btn-info");
+        drawGraph(classes);
     });
 };
 
@@ -38,6 +39,57 @@ function loadButtons(classes, id, btnClass) {
         });
         $("#" + id).append(classButton);
     });
+}
+
+function drawGraph(classes, id) {
+	var g = {
+	      nodes: [],
+	      edges: []
+	    },
+	    currentNode,
+	    i = 0;
+	console.log("before");
+	classes.forEach(function(val) {
+		currentNode = val;
+		var className = getName(val);
+		g.nodes.push({
+		    id: currentNode,
+		    label: className,
+		    x: Math.random(),
+		    y: Math.random(),
+		    size: 1,
+		    color: '#666'
+		});
+		loadClassInfo(function (info) {
+            cleanInfoPanel();
+            var classInfo = JSON.parse(info);
+            classInfo.subclasses.forEach(function(subclass) {
+            	g.edges.push({
+    			    id: 'e' + i++,
+    			    source: currentNode,
+    			    target: subclass,
+    			    size: 1,
+    			    color: '#ccc'
+    			});
+            });
+            classInfo.superclasses.forEach(function(superclass) {
+            	g.edges.push({
+    			    id: 'e' + i++,
+    			    source: currentNode,
+    			    target: superclass,
+    			    size: 1,
+    			    color: '#ccc'
+    			});
+            });
+            console.log("done");
+        }, val);
+	});
+	console.log("after");
+
+	new sigma({
+	  graph: g,
+	  container: 'graph-container'
+	});
 }
 
 function loadLabels(instances, id, labelClass) {
