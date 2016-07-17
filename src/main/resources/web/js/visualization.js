@@ -49,6 +49,7 @@ function drawGraph(classes, id) {
 	    currentNode,
 	    i = 0;
 	console.log("before");
+    var classesSize = classes.length;
 	classes.forEach(function(val) {
 		currentNode = val;
 		var className = getName(val);
@@ -61,7 +62,6 @@ function drawGraph(classes, id) {
 		    color: '#666'
 		});
 		loadClassInfo(function (info) {
-            cleanInfoPanel();
             var classInfo = JSON.parse(info);
             classInfo.subclasses.forEach(function(subclass) {
             	g.edges.push({
@@ -82,14 +82,17 @@ function drawGraph(classes, id) {
     			});
             });
             console.log("done");
+            classesSize--;
+            if(classesSize == 0) {
+                new sigma({
+                    graph: g,
+                    container: 'graph-container'
+                });
+            }
         }, val);
 	});
 	console.log("after");
 
-	new sigma({
-	  graph: g,
-	  container: 'graph-container'
-	});
 }
 
 function loadLabels(instances, id, labelClass) {
