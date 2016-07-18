@@ -9,6 +9,7 @@ import org.apache.jena.rdf.model.ModelFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Arrays;
 
 import static spark.Spark.get;
 import static spark.Spark.staticFileLocation;
@@ -40,7 +41,16 @@ public class App
             }
             return new Gson().toJson(OntoUtils.getClassInfo(model, classId));
         });
-        
+
+        get("/properties", (req, res) -> {
+            String propId = req.queryParams("prop");
+            if(StringUtils.isBlank(propId)) {
+                String gson = new Gson().toJson(OntoUtils.getProperties(model));
+                return gson;
+            }
+           return new Gson().toJson(OntoUtils.getPropertyInfo(model, propId));
+        });
+
         get("/allClasses", (req, res) -> {
             return new Gson().toJson(OntoUtils.getClassesInfo(model));
         });

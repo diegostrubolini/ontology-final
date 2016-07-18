@@ -25,14 +25,16 @@
         <h1>Ontology Visualization</h1>
     </div>
     <div class="col-md-12">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <h1>Classes</h1>
             <div id="classes"></div>
+            <h1>Properties</h1>
+            <div id="properties"></div>
         </div>
-        <div id="info" class="col-md-4">
-            <div class="panel panel-primary">
+        <div id="info" class="col-md-6">
+            <div class="panel panel-primary" id="classPanel">
                 <div class="panel-heading">
-                    <h1>Info</h1>
+                    <h1>Class Info</h1>
                     <a href="graph-visualization.html" class="btn-info btn class-btn">Graph visualization</a>
                 </div>
                 <div class="panel-body">
@@ -48,6 +50,27 @@
                     <h4>Instances</h4>
                     <div id="instances">
                         <div class="alert alert-info" role="alert">Press on a class to see its instances</div>
+                    </div>
+                    <h4>Description</h4>
+                    <div id="comment">
+                        <div class="alert alert-info" role="alert">Press on a class to see its description</div>
+                    </div>
+                </div>
+            </div>
+            <div style="display:none" class="panel panel-primary" id="propertyPanel">
+                <div class="panel-heading">
+                    <h1>Property Info</h1>
+                    <a href="graph-visualization.html" class="btn-info btn class-btn">Graph visualization</a>
+                </div>
+                <div class="panel-body">
+                    <h3 id="propertyName"></h3>
+                    <h4>Range</h4>
+                    <div id="range">
+                        <div class="alert alert-info" role="alert">Press on a property to see its range</div>
+                    </div>
+                    <h4>Domain</h4>
+                    <div id="domain">
+                        <div class="alert alert-info" role="alert">Press on a property to see its domain</div>
                     </div>
                 </div>
             </div>
