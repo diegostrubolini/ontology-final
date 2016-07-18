@@ -15,6 +15,38 @@ function drawGraph(classes) {
 	    currentNode,
 	    i = 0;
     var classesSize = classes.length;
+    
+    var config = {
+    	node: [{
+    		show: 'hovers',
+    		hide: 'hovers',
+    		cssClass: 'sigma-tooltip',
+    		position: 'left',
+    		template:
+    			'<div class="arrow"></div>' +
+    		    ' <div class="sigma-tooltip-header">{{label}}</div>' +
+    		    '  <div class="sigma-tooltip-body">' +
+    		    '    <table>' +
+    		    '      <tr><th>Name</th> <td>{{data.name}}</td></tr>' +
+    		    '      <tr><th>Gender</th> <td>{{data.gender}}</td></tr>' +
+    		    '      <tr><th>Age</th> <td>{{data.age}}</td></tr>' +
+    		    '      <tr><th>City</th> <td>{{data.city}}</td></tr>' +
+    		    '    </table>' +
+    		    '  </div>' +
+    		    '  <div class="sigma-tooltip-footer">Number of connections: {{degree}}</div>',
+    		renderer: function(node, template) {
+		      // The function context is s.graph
+		      node.degree = this.degree(node.id);
+
+		      // Returns an HTML string:
+		      return Mustache.render(template, node);
+
+		      // Returns a DOM Element:
+		      //var el = document.createElement('div');
+		      //return el.innerHTML = Mustache.render(template, node);
+		    }
+    	}]
+    };
 
     classes.forEach(function (classInfo) {
     	g.nodes.push({
@@ -23,7 +55,13 @@ function drawGraph(classes) {
 		    x: Math.random(),
 		    y: Math.random(),
 		    size: 1,
-		    color: '#666'
+		    color: '#666',
+		    data: {
+		    	name: 'Germán Rodrigo Romarión',
+		    	gender: 'Male',
+		    	age: 25,
+		    	city: 'Buenos Aires'
+		    }
 		});
         classInfo.superclasses.forEach(function(superclass) {
         	createEdge(g, classInfo.classId, superclass, 'e' + i++);	
@@ -50,6 +88,7 @@ function drawGraph(classes) {
                     defaultNodeBorderColor: '#000'
                 }
             });
+            sigma.plugins.tooltips(s, s.renderers[0], config);
         }
     });
 }
