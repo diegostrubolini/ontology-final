@@ -27,10 +27,7 @@ function drawGraph(classes) {
     		    ' <div class="sigma-tooltip-header">{{label}}</div>' +
     		    '  <div class="sigma-tooltip-body">' +
     		    '    <table>' +
-    		    '      <tr><th>Name</th> <td>{{data.name}}</td></tr>' +
-    		    '      <tr><th>Gender</th> <td>{{data.gender}}</td></tr>' +
-    		    '      <tr><th>Age</th> <td>{{data.age}}</td></tr>' +
-    		    '      <tr><th>City</th> <td>{{data.city}}</td></tr>' +
+    		    '      <tr><th>Superclass:</th> <td> {{data.superclass}}</td></tr>' +
     		    '    </table>' +
     		    '  </div>' +
     		    '  <div class="sigma-tooltip-footer">Number of connections: {{degree}}</div>',
@@ -49,22 +46,23 @@ function drawGraph(classes) {
     };
 
     classes.forEach(function (classInfo) {
-    	g.nodes.push({
+    	var node = {
 		    id: classInfo.classId,
-		    label: getName(classInfo.classId),
+		    label: classInfo.classId,
 		    x: Math.random(),
 		    y: Math.random(),
 		    size: 1,
 		    color: '#666',
 		    data: {
-		    	name: 'Germán Rodrigo Romarión',
-		    	gender: 'Male',
-		    	age: 25,
-		    	city: 'Buenos Aires'
+		    	superclass: "<None>"
 		    }
-		});
+		};
+    	g.nodes.push(node);
         classInfo.superclasses.forEach(function(superclass) {
-        	createEdge(g, classInfo.classId, superclass, 'e' + i++);	
+        	if ((typeof superclass.iri) !== 'undefined') {
+        		node.data.superclass = superclass.iri;         		
+        	}
+        	createEdge(g, classInfo.classId, superclass.iri, 'e' + i++);	
         });
         classesSize--;
         if(classesSize == 0) {
