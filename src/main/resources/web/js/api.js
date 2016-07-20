@@ -20,9 +20,13 @@ function loadClassesInfo(callback) {
 }
 
 function loadClassInfo(callback, iri) {
-    performQuery(callback, "/classes", {"class" : iri});
+    performQuery(callback, "/classes", { "class" : iri });
 }
 
 function loadPropertyInfo(callback, name) {
-    performQuery(callback, "/properties", {"prop" : name.iri});
+    performQuery(callback, "/properties", { "prop" : name.iri });
+}
+
+function loadClassShortName(callback, iri) {
+	performQuery(callback, "/shortName", { "iri": iri });
 }

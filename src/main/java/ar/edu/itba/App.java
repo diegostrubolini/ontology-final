@@ -1,18 +1,18 @@
 package ar.edu.itba;
 
-import com.google.gson.Gson;
+import static spark.Spark.get;
+import static spark.Spark.staticFileLocation;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;
 import org.apache.jena.rdf.model.ModelFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.Arrays;
-
-import static spark.Spark.get;
-import static spark.Spark.staticFileLocation;
+import com.google.gson.Gson;
 
 public class App
 {
@@ -53,6 +53,10 @@ public class App
 
         get("/allClasses", (req, res) -> {
             return new Gson().toJson(OntoUtils.getClassesInfo(model));
+        });
+        
+        get("/shortName", (req, res) -> {
+            return model.shortForm(req.queryParams("iri")).replace(":", "");
         });
     }
 }

@@ -24,6 +24,7 @@ function getName(labeledClass){
 }
 
 function cleanInfoPanel() {
+	$('#uri').empty();
     $('#subclasses').empty();
     $('#superclasses').empty();
     $('#instances').empty();
@@ -45,12 +46,14 @@ function showPropertiesInfoPlanel(){
 }
 function loadButtons(classes, id, btnClass) {
     if(classes.length == 0){
-        $("#" + id).append(addAlert("warning","No "+ id + " were found"));
+        $("#" + id).append(addAlert("warning", "No "+ id + " were found"));
         return;
     }
     classes.forEach(function(val){
         var classButton = $("<button>", {class: btnClass + " btn btn-sm class-btn"});
-        classButton.text(getName(val));
+        loadClassShortName(function (shortName) {
+        	classButton.text(shortName);
+        }, val.iri);
         classButton.click(function () {
             loadClassInfo(function (info){
                 showInfo(info);
@@ -65,11 +68,12 @@ function showInfo (info) {
     cleanInfoPanel();
     var classInfo = JSON.parse(info);
     $('#className').text(getName(classInfo.classId));
+    loadLabels([classInfo.classId], "uri", "uri-label");
     loadButtons(classInfo.subclasses, "subclasses", "btn-warning");
     loadButtons(classInfo.superclasses, "superclasses", "btn-success");
     loadLabels(classInfo.instances, "instances", "instance-label");
     if(classInfo.comment === undefined){
-        $("#comment").append(addAlert("warning","No description was found"));
+        $("#comment").append(addAlert("warning", "No description was found"));
     } else {
         $('#comment').append(addAlert("info", classInfo.comment ));
     }
@@ -77,7 +81,7 @@ function showInfo (info) {
 
 function loadPropertyButtons(properties, id, btnClass) {
     if(properties.length == 0){
-        $("#" + id).append(addAlert("warning","No "+ id + " were found"));
+        $("#" + id).append(addAlert("warning", "No "+ id + " were found"));
         return;
     }
     properties.forEach(function(val){

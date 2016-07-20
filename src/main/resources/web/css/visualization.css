@@ -9,6 +9,13 @@
     color: white
 }
 
+.uri-label {
+    margin: 3px;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    color: white
+}
+
 .instance-label:hover {
     color: white
 }

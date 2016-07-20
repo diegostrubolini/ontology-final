@@ -22,6 +22,7 @@ public class OntoUtils {
         classInfo.put("superclasses", superclasses);
         classInfo.put("instances", instances);
         classInfo.put("classId", ontClass.toString());
+        classInfo.put("shortForm", model.shortForm(classId));
         if(ontClass.getProperty(RDFS.comment) != null) {
             classInfo.put("comment", ontClass.getProperty(RDFS.comment).getObject().toString());
         }
