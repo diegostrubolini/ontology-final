@@ -53,24 +53,26 @@ function loadButtons(classes, id, btnClass) {
         classButton.text(getName(val));
         classButton.click(function () {
             loadClassInfo(function (info){
-                showClassesInfoPlanel();
-                cleanInfoPanel();
-                var classInfo = JSON.parse(info);
-                $('#className').text(getName(classInfo.classId));
-                loadButtons(classInfo.subclasses, "subclasses", "btn-warning");
-                loadButtons(classInfo.superclasses, "superclasses", "btn-success");
-                loadLabels(classInfo.instances, "instances", "instance-label");
-                if(classInfo.comment === undefined){
-                    $("#comment").append(addAlert("warning","No description was found"));
-                } else {
-                    $('#comment').append(addAlert("info", classInfo.comment ));
-                }
-
-
-            }, val);
+                showInfo(info);
+            }, val.iri);
         });
         $("#" + id).append(classButton);
     });
+}
+
+function showInfo (info) {
+	showClassesInfoPlanel();
+    cleanInfoPanel();
+    var classInfo = JSON.parse(info);
+    $('#className').text(getName(classInfo.classId));
+    loadButtons(classInfo.subclasses, "subclasses", "btn-warning");
+    loadButtons(classInfo.superclasses, "superclasses", "btn-success");
+    loadLabels(classInfo.instances, "instances", "instance-label");
+    if(classInfo.comment === undefined){
+        $("#comment").append(addAlert("warning","No description was found"));
+    } else {
+        $('#comment').append(addAlert("info", classInfo.comment ));
+    }
 }
 
 function loadPropertyButtons(properties, id, btnClass) {
@@ -94,6 +96,7 @@ function loadPropertyButtons(properties, id, btnClass) {
         $("#" + id).append(propertyButton);
     });
 }
+
 function createPropertyButton(id, value) {
     if(value === undefined) {
         $("#" + id).append(addAlert("warning","No "+ id + " was found"));
@@ -101,6 +104,11 @@ function createPropertyButton(id, value) {
     }
     var button = $("<button>", {class:"btn-success btn btn-sm class-btn"});
     button.text(value);
+    button.click(function () {
+        loadClassInfo(function (info){
+            showInfo(info);
+        }, value);
+    });
     $("#" + id).append(button);
 }
 

@@ -19,8 +19,8 @@ function loadClassesInfo(callback) {
     performQuery(callback, "/allClasses", {});
 }
 
-function loadClassInfo(callback, name) {
-    performQuery(callback, "/classes", {"class" : name.iri});
+function loadClassInfo(callback, iri) {
+    performQuery(callback, "/classes", {"class" : iri});
 }
 
 function loadPropertyInfo(callback, name) {
