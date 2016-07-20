@@ -31,6 +31,7 @@ function cleanInfoPanel() {
     $('#subclasses').empty();
     $('#superclasses').empty();
     $('#isDomainOf').empty();
+    $('#isRangeOf').empty();
     $('#instances').empty();
     $('#comment').empty();
 }
@@ -73,8 +74,9 @@ function showInfo (info) {
     $('#classTitle').text("Class Info - " + getName(classInfo));
     loadLabels([classInfo.classId], "iri", "uri-label");
     loadButtons(classInfo.subclasses, "subclasses", "btn-warning");
-    loadButtons(classInfo.superclasses, "superclasses", "btn-success");
+    loadButtons(classInfo.superclasses, "superclasses", "btn-primary");
     loadPropertyButtons(classInfo.isDomainOf, "isDomainOf", "btn-success");
+    loadPropertyButtons(classInfo.isRangeOf, "isRangeOf", "btn-success");
     loadLabels(classInfo.instances, "instances", "instance-label");
     if(classInfo.comment === undefined){
         $("#comment").append(addAlert("warning", "No description was found"));
@@ -99,7 +101,7 @@ function loadPropertyButtons(properties, id, btnClass) {
                 $('#propertyName').text(propertyInfo.propId);
                 $('#propertyTitle').text("Property Info - " + getName(propertyInfo));
                 createPropertyButton("range",propertyInfo.range );
-                createPropertyButton ("domain",propertyInfo.domain);
+                createPropertyButton("domain",propertyInfo.domain);
             }, val);
         });
         $("#" + id).append(propertyButton);
@@ -111,7 +113,7 @@ function createPropertyButton(id, value) {
         $("#" + id).append(addAlert("warning","No "+ id + " was found"));
         return;
     }
-    var button = $("<button>", {class:"btn-success btn btn-sm class-btn"});
+    var button = $("<button>", {class:"btn-info btn btn-sm class-btn"});
     button.text(getName(value));
     button.click(function () {
         loadClassInfo(function (info){

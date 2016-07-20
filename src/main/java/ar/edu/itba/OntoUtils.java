@@ -9,6 +9,8 @@ import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntProperty;
 import org.apache.jena.ontology.OntResource;
+import org.apache.jena.query.*;
+import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.util.iterator.ExtendedIterator;
 import org.apache.jena.vocabulary.RDFS;
 
@@ -20,9 +22,11 @@ public class OntoUtils {
         List<LabeledClass> superclasses = itClassesToList(ontClass.listSuperClasses(), model);
         List<String> instances = itInstancesToList(ontClass.listInstances(), model);
         List<LabeledClass> isDomainOf = itPropertiesToList(ontClass.listDeclaredProperties(),model);
+        List<LabeledClass> isRangeOf = getRangeOf(ontClass);
         classInfo.put("subclasses", subclasses);
         classInfo.put("superclasses", superclasses);
         classInfo.put("isDomainOf", isDomainOf);
+        classInfo.put("isRangeOf", isRangeOf);
         classInfo.put("instances", instances);
         classInfo.put("classId", ontClass.toString());
         classInfo.put("shortName", model.shortForm(classId));
@@ -30,6 +34,29 @@ public class OntoUtils {
             classInfo.put("comment", ontClass.getProperty(RDFS.comment).getObject().toString());
         }
         return classInfo;
+    }
+
+    private static List<LabeledClass> getRangeOf(OntClass ontClass) {
+        List<LabeledClass> l = new ArrayList<>();
+        OntModel model = ontClass.getOntModel();
+        String queryString =
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "+
+                        "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  "+
+                        "select ?uri "+
+                        "where { "+
+                        "?uri rdfs:range <"+ontClass.toString()+">  "+
+                        "} \n ";
+        Query query = QueryFactory.create(queryString);
+
+        QueryExecution qe = QueryExecutionFactory.create(query, model);
+        ResultSet results =  qe.execSelect();
+        while(results.hasNext()){
+            QuerySolution solution = results.nextSolution();
+            OntResource res = (OntResource) solution.getResource("uri");
+            l.add(createLabeledClass(model, res));
+        }
+        qe.close();
+        return l;
     }
 
     public static List<Map<String, Object>> getClassesInfo(OntModel model) {

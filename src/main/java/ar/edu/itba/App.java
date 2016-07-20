@@ -22,7 +22,7 @@ public class App
 
         InputStream in;
         if(args.length == 0) {
-            in = App.class.getResourceAsStream("/wine.rdf");
+            in = App.class.getResourceAsStream("/ejemplo_clases.owl");
         } else {
             in = new FileInputStream(new File(args[0]));
         }
