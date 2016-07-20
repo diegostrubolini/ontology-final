@@ -27,7 +27,7 @@ function getName(labeledClass){
 }
 
 function cleanInfoPanel() {
-	$('#uri').empty();
+	$('#iri').empty();
     $('#subclasses').empty();
     $('#superclasses').empty();
     $('#instances').empty();
@@ -69,7 +69,7 @@ function showInfo (info) {
     cleanInfoPanel();
     var classInfo = JSON.parse(info);
     $('#className').text(getName(classInfo.classId));
-    loadLabels([classInfo.classId], "uri", "uri-label");
+    loadLabels([classInfo.classId], "iri", "uri-label");
     loadButtons(classInfo.subclasses, "subclasses", "btn-warning");
     loadButtons(classInfo.superclasses, "superclasses", "btn-success");
     loadLabels(classInfo.instances, "instances", "instance-label");
