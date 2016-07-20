@@ -20,6 +20,9 @@ function getName(labeledClass){
     if(labeledClass.label !== undefined) {
         return labeledClass.label;
     }
+    if(labeledClass.shortName !== undefined){
+        return labeledClass.shortName;
+    }
     return labeledClass.iri;
 }
 
@@ -51,9 +54,7 @@ function loadButtons(classes, id, btnClass) {
     }
     classes.forEach(function(val){
         var classButton = $("<button>", {class: btnClass + " btn btn-sm class-btn"});
-        loadClassShortName(function (shortName) {
-        	classButton.text(shortName);
-        }, val.iri);
+        classButton.text(getName(val));
         classButton.click(function () {
             loadClassInfo(function (info){
                 showInfo(info);
@@ -107,11 +108,11 @@ function createPropertyButton(id, value) {
         return;
     }
     var button = $("<button>", {class:"btn-success btn btn-sm class-btn"});
-    button.text(value);
+    button.text(getName(value));
     button.click(function () {
         loadClassInfo(function (info){
             showInfo(info);
-        }, value);
+        }, value.iri);
     });
     $("#" + id).append(button);
 }

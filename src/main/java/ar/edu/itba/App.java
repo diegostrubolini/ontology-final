@@ -54,9 +54,5 @@ public class App
         get("/allClasses", (req, res) -> {
             return new Gson().toJson(OntoUtils.getClassesInfo(model));
         });
-        
-        get("/shortName", (req, res) -> {
-            return model.shortForm(req.queryParams("iri")).replace(":", "");
-        });
     }
 }
