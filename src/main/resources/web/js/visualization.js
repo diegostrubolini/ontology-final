@@ -30,6 +30,7 @@ function cleanInfoPanel() {
 	$('#iri').empty();
     $('#subclasses').empty();
     $('#superclasses').empty();
+    $('#isDomainOf').empty();
     $('#instances').empty();
     $('#comment').empty();
 }
@@ -72,6 +73,7 @@ function showInfo (info) {
     loadLabels([classInfo.classId], "iri", "uri-label");
     loadButtons(classInfo.subclasses, "subclasses", "btn-warning");
     loadButtons(classInfo.superclasses, "superclasses", "btn-success");
+    loadPropertyButtons(classInfo.isDomainOf, "isDomainOf", "btn-success");
     loadLabels(classInfo.instances, "instances", "instance-label");
     if(classInfo.comment === undefined){
         $("#comment").append(addAlert("warning", "No description was found"));

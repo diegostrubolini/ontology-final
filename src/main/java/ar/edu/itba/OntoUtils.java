@@ -19,8 +19,10 @@ public class OntoUtils {
         List<LabeledClass> subclasses = itClassesToList(ontClass.listSubClasses(), model);
         List<LabeledClass> superclasses = itClassesToList(ontClass.listSuperClasses(), model);
         List<String> instances = itInstancesToList(ontClass.listInstances(), model);
+        List<LabeledClass> isDomainOf = itPropertiesToList(ontClass.listDeclaredProperties(),model);
         classInfo.put("subclasses", subclasses);
         classInfo.put("superclasses", superclasses);
+        classInfo.put("isDomainOf", isDomainOf);
         classInfo.put("instances", instances);
         classInfo.put("classId", ontClass.toString());
         classInfo.put("shortForm", model.shortForm(classId));
