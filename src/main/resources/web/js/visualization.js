@@ -70,6 +70,7 @@ function showInfo (info) {
     cleanInfoPanel();
     var classInfo = JSON.parse(info);
     $('#className').text(getName(classInfo.classId));
+    $('#classTitle').text("Class Info - " + getName(classInfo));
     loadLabels([classInfo.classId], "iri", "uri-label");
     loadButtons(classInfo.subclasses, "subclasses", "btn-warning");
     loadButtons(classInfo.superclasses, "superclasses", "btn-success");
@@ -96,6 +97,7 @@ function loadPropertyButtons(properties, id, btnClass) {
                 cleanPropertyInfoPanel();
                 var propertyInfo = JSON.parse(info);
                 $('#propertyName').text(propertyInfo.propId);
+                $('#propertyTitle').text("Property Info - " + getName(propertyInfo));
                 createPropertyButton("range",propertyInfo.range );
                 createPropertyButton ("domain",propertyInfo.domain);
             }, val);

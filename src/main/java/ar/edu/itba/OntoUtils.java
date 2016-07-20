@@ -25,7 +25,7 @@ public class OntoUtils {
         classInfo.put("isDomainOf", isDomainOf);
         classInfo.put("instances", instances);
         classInfo.put("classId", ontClass.toString());
-        classInfo.put("shortForm", model.shortForm(classId));
+        classInfo.put("shortName", model.shortForm(classId));
         if(ontClass.getProperty(RDFS.comment) != null) {
             classInfo.put("comment", ontClass.getProperty(RDFS.comment).getObject().toString());
         }
@@ -110,7 +110,7 @@ public class OntoUtils {
             propInfo.put("domain", createLabeledClass(model, ontProp.getDomain()));
         }
         propInfo.put("classId", ontProp.toString());
-        propInfo.put("shortForm", model.shortForm(propId));
+        propInfo.put("shortName", model.shortForm(propId));
         return propInfo;
     }
 
